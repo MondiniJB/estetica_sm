@@ -1,36 +1,92 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-gold: #d4af37;
-  --color-dark-bg: #0a0a0a;
-  --color-dark-surface: rgba(255, 255, 255, 0.05);
+  --color-girl-bg: #FFF0F5;
+  --color-girl-pink: #FFB6C1;
+  --color-girl-hotpink: #FF69B4;
+  --color-girl-red: #D2042D;
+  --color-girl-cream: #FFFDD0;
   
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-hand: 'Caveat', cursive;
 }
 
 body {
-  @apply bg-dark-bg text-white font-sans antialiased;
+  @apply bg-girl-bg text-gray-800 font-sans antialiased;
+  /* Soft pink to blush gradient */
+  background-image: radial-gradient(circle at 50% 0%, rgba(255, 182, 193, 0.2) 0%, transparent 70%);
+  background-attachment: fixed;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-.glass-panel {
-  @apply bg-dark-surface backdrop-blur-md border border-white/10 rounded-2xl;
+/* Polaroids */
+.polaroid {
+  @apply bg-white p-4 pb-12 shadow-xl border border-gray-100 transform transition-transform duration-300;
+  box-shadow: 0 10px 25px -5px rgba(255, 182, 193, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-gold {
-  @apply bg-primary-gold text-black font-bold py-3 px-8 rounded-full transition-all duration-300 hover:bg-[#ebd27c] hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:translate-y-0;
+.polaroid:hover {
+  @apply scale-105 z-10;
 }
 
-
-
-/* Hide iOS Safari play button on low power mode */
-video::-webkit-media-controls {
-  display: none !important;
+/* Washi Tape */
+.washi-tape {
+  @apply absolute h-6 w-24 bg-girl-pink/60 backdrop-blur-sm -top-3 left-1/2 -translate-x-1/2 -rotate-2;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
-video::-webkit-media-controls-start-playback-button {
-  display: none !important;
-  -webkit-appearance: none;
+
+.washi-tape-pattern {
+  @apply absolute h-8 w-28 -top-4 -right-4 rotate-6 bg-cover;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 255, 255, 0.3) 5px, rgba(255, 255, 255, 0.3) 10px), linear-gradient(to right, #ffb6c1, #ff69b4);
+  opacity: 0.8;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
+
+/* Scrapbook Coupon / Ticket */
+.ticket-btn {
+  @apply relative bg-white text-girl-red font-serif font-bold italic py-4 px-10 text-xl border-2 border-dashed border-girl-pink transition-all duration-300 hover:bg-girl-pink/10 hover:border-girl-hotpink hover:-translate-y-1 hover:shadow-lg;
+}
+
+/* Handwritten Notes */
+.handwritten {
+  @apply font-hand text-3xl text-girl-hotpink transform -rotate-2;
+}
+
+/* Chat Bubbles (iMessage Style) */
+.chat-bubble-sent {
+  @apply bg-blue-500 text-white px-5 py-3 rounded-2xl rounded-br-sm max-w-[80%] inline-block shadow-sm;
+}
+
+.chat-bubble-received {
+  @apply bg-gray-200 text-gray-800 px-5 py-3 rounded-2xl rounded-bl-sm max-w-[80%] inline-block shadow-sm;
+}
+
+.chat-bubble-pink {
+  @apply bg-girl-pink text-gray-900 px-5 py-3 rounded-2xl rounded-bl-sm max-w-[80%] inline-block shadow-sm;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 4s ease-in-out 2s infinite;
+}
+
+/* Lenis scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
